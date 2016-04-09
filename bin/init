@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Command to generate random string
+# cat /dev/urandom | env LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
+
+
+
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: init <filename>"
+  exit 62
+fi
+
+# Check for file duplication
+if [ -e $1.bank ] || [ -e $1.atm ]; then
+  echo "Error: one of the files already exists"
+  exit 63
+else
+  # create bank/atm files
+  touch $1.bank
+  touch $1.atm
+8
+  # check for other errors
+
+  
+
+  # create key files
+  # generate pub/private key pair for bank
+  openssl genrsa -out privkey 2048
+  openssl rsa -in privkey -outform PEM -pubout -out pubkey
+  
+  cat pubkey >> $1.bank
+  cat pubkey >> $1.atm
+  cat privkey >> $1.bank
+  rm pubkey
+  rm privkey
+  
+  #generate pub/private key pair for atm
+  openssl genrsa -out privkey 2048
+  openssl rsa -in privkey -outform PEM -pubout -out pubkey
+  
+  cat pubkey >> $1.atm
+  cat pubkey >> $1.bank
+  cat privkey >> $1.atm
+  rm pubkey
+  rm privkey
+  
+  echo "Successfully initialized bank state"
+  exit 0
+fi
