@@ -1,7 +1,6 @@
-/* 
+/*
  * The main program for the ATM.
  *
- * You are free to change this as necessary.
  */
 
 #include "atm.h"
@@ -16,13 +15,13 @@ int main(int argc, char **argv)
 {
     char* filename = argv[1];
     FILE* fp;
-  
+
     fp = fopen(filename,"r");
     if(fp == NULL){
         puts("ERROR OPENING FILE");
         return 64;
     }
-    
+
     char user_input[10000];
     /*BIO * keybio = BIO_new(BIO_s_mem());
     RSA_print(keybio, rsa_pub, 0);
@@ -32,11 +31,11 @@ int main(int argc, char **argv)
         printf("%s",buffer);
     }
     BIO_free(keybio);*/
-    
-    
+
+
     ATM *atm = atm_create();
     /*Make sure to free atm->bank_pub_key at some point*/
-    
+
     atm->bank_pub_key = PEM_read_RSA_PUBKEY(fp, NULL, NULL, NULL);
     if(atm->bank_pub_key == NULL)
     {
@@ -44,7 +43,7 @@ int main(int argc, char **argv)
         RSA_free(atm->bank_pub_key);
         return 0;
     }
-    
+
     atm->atm_pub_key = PEM_read_RSA_PUBKEY(fp, NULL, NULL, NULL);
     if(atm->atm_pub_key == NULL)
     {
@@ -52,16 +51,16 @@ int main(int argc, char **argv)
         RSA_free(atm->atm_pub_key);
         return 0;
     }
-    
+
     atm->atm_priv_key = PEM_read_RSAPrivateKey(fp, NULL, NULL, NULL);
     if(atm->atm_priv_key == NULL)
     {
         printf("\n%s\n", "Error Reading atm private key");
         RSA_free(atm->atm_priv_key);
         return 0;
-    } 
-    
-    
+    }
+
+
     /*BIO * keybio = BIO_new(BIO_s_mem());
     RSA_print(keybio,atm->bank_pub_key, 0);
     char buffer [1024];
@@ -79,7 +78,7 @@ int main(int argc, char **argv)
     }
     BIO_free(keybio);*/
 
-    
+
     fclose(fp);
 
     printf("%s", prompt);
@@ -95,7 +94,7 @@ int main(int argc, char **argv)
             printf("%s", prompt);
             fflush(stdout);
         }
-        
+
     }
     RSA_free(atm->bank_pub_key);
     RSA_free(atm->atm_pub_key);

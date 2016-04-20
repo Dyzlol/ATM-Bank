@@ -1,9 +1,6 @@
-/* 
+/*
  * The main program for the Router.
  *
- * For the first part of the project, you may not change this.
- *
- * For the second part of the project, feel free to change as necessary.
  */
 
 

@@ -1,7 +1,5 @@
-/* 
+/*
  * The main program for the Bank.
- *
- * You are free to change this as necessary.
  */
 
 #include <string.h>
@@ -48,7 +46,7 @@ int main(int argc, char**argv)
         RSA_free(bank->atm_pub_key);
         return 0;
     }
-    
+
     fclose(fp);
 
     printf("%s", prompt);

@@ -2,10 +2,6 @@
  * The Router forwards packets between the ATM and the Bank.  It
  * takes no commands from stdin.
  *
- * For the first part of the project, you may not modify the router.
- *
- * For the second part of the project, you may modify the router to
- * try to violate the security of other team's protocols.
  */
 
 #ifndef __ROUTER_H__

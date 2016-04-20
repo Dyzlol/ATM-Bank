@@ -1,15 +1,7 @@
 /*
  * The Bank takes commands from stdin as well as from the ATM.  
  *
- * Commands from stdin be handled by bank_process_local_command.
- *
- * Remote commands from the ATM should be handled by
- * bank_process_remote_command.
- *
  * The Bank can read both .card files AND .pin files.
- *
- * Feel free to update the struct and the processing as you desire
- * (though you probably won't need/want to change send/recv).
  */
 
 #ifndef __BANK_H__
@@ -58,4 +50,3 @@ void bank_process_local_command(Bank *bank, char *command, size_t len);
 void bank_process_remote_command(Bank *bank, char *command, size_t len);
 
 #endif
-
